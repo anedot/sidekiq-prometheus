@@ -62,7 +62,7 @@ RSpec.describe SidekiqPrometheus::PeriodicMetrics do
   describe '#report_global_metrics' do
     let(:sidekiq_stats) { double 'Sidekiq::Stats.new' }
     let(:queue)         { double 'instance of Sidekiq::Queue', name: 'critical', size: 42, latency: 1 }
-    let(:another_queue) { double 'another Sidekiq::Queue', name: 'low', size: 0, latency: 0 }
+    let(:another_queue) { double 'another Sidekiq::Queue', name: 'low', size: 0, latency: 0.543 }
 
     before do
       allow(stats_class).to receive(:new).and_return(sidekiq_stats)
@@ -86,9 +86,9 @@ RSpec.describe SidekiqPrometheus::PeriodicMetrics do
       expect(metric).to have_received(:set).with(num, labels: {}).exactly(described_class::GLOBAL_STATS.size).times
 
       expect(metric).to have_received(:set).with(queue.size, labels: { queue: queue.name })
-      expect(metric).to have_received(:observe).with(queue.latency, labels: { queue: queue.name })
+      expect(metric).to have_received(:set).with(queue.latency, labels: { queue: queue.name })
       expect(metric).to have_received(:set).with(another_queue.size, labels: { queue: another_queue.name })
-      expect(metric).to have_received(:observe).with(another_queue.latency, labels: { queue: another_queue.name })
+      expect(metric).to have_received(:set).with(another_queue.latency, labels: { queue: another_queue.name })
     end
   end
 

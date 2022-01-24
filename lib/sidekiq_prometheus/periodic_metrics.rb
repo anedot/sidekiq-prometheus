@@ -90,7 +90,7 @@ class SidekiqPrometheus::PeriodicMetrics
 
     sidekiq_queue.all.each do |queue|
       SidekiqPrometheus[:sidekiq_enqueued]&.set(queue.size, labels: { queue: queue.name })
-      SidekiqPrometheus[:sidekiq_queue_latency]&.observe(queue.latency, labels: { queue: queue.name })
+      SidekiqPrometheus[:sidekiq_queue_latency]&.set(queue.latency, labels: { queue: queue.name })
     end
   end
 

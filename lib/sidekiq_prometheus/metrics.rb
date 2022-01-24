@@ -19,7 +19,7 @@ module SidekiqPrometheus::Metrics
       docstring: 'Total Size of all known queues',
       labels:    %i[queue], },
     { name:      :sidekiq_queue_latency,
-      type:      :summary,
+      type:      :gauge,
       docstring: 'Latency (in seconds) of all queues',
       labels:    %i[queue], },
     { name:      :sidekiq_failed,

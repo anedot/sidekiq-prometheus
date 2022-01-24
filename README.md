@@ -161,7 +161,7 @@ which ensures that metrics are only reported once per cluster.
 | sidekiq_workers_size | gauge | Total number of workers processing jobs |
 | sidekiq_dead_size | gauge | Total Dead Size |
 | sidekiq_enqueued | gauge | Total Size of all known queues |
-| sidekiq_queue_latency | summary | Latency (in seconds) of all queues |
+| sidekiq_queue_latency | gauge | Latency (in seconds) of all queues |
 | sidekiq_failed | gauge | Number of job executions which raised an error |
 | sidekiq_processed | gauge | Number of job executions completed (success or failure) |
 | sidekiq_retry_size | gauge | Total Retries Size |
