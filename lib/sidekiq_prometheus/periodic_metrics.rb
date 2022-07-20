@@ -42,6 +42,7 @@ class SidekiqPrometheus::PeriodicMetrics
 
     @sidekiq_stats = sidekiq_stats
     @sidekiq_queue = sidekiq_queue
+    senate = Sidekiq.try(:service, "ent:senate") if senate.nil?
     @senate = if senate.nil?
                 if Object.const_defined?('Sidekiq::Senate')
                   Sidekiq::Senate
